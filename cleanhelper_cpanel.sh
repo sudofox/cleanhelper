@@ -12,12 +12,12 @@ if [ -d /home/temp ]; then # LW server
 fi;
 
 # cPanel trash dirs
-echo "## cPanel trash folders"
+printf "## cPanel trash folders\n"
 #du -sh -t20k /home/*/.trash 2>/dev/null
 du -sh /home/*/.trash 2>/dev/null |egrep "(M|G)[[:space:]]"
 
 # Softaculous Backups
-echo "## Softaculous backups (cPanel backups recommended instead)"
+printf "## Softaculous backups (cPanel backups recommended instead)\n"
 #du -sh -t20M /home/*/softaculous_backups 2>/dev/null
 du -sh /home/*/softaculous_backups 2>/dev/null | egrep "(M|G)[[:space:]]"
 
@@ -78,7 +78,7 @@ printf "## .Trash, .spam, .Junk IMAP folders\n"
 du -sh /home/*/mail/*.*/*/.Trash /home/*/mail/*/*/.spam/ /home/*/mail/*.*/*/.Junk 2>/dev/null|egrep "([0-9]{1}G|[0-9]{2}M)[[:space:]]"
 
 printf "## Failed/partially created zip files\n"
-du -sh /home/*/zi?????? /home/*/*/zi?????? /home/*/*/zi?????? /home/*/*/*/zi?????? 2>/dev/null| sort -h
+du -sh /home/*/zi?????? /home/*/*/zi?????? /home/*/*/zi?????? /home/*/*/*/zi?????? 2>/dev/null| grep -v "/home/virtfs/" | sort -h
 
 printf "## zip files > 100 MB\n"
 find /home -type f -size +100M|grep -v virtfs|grep "\.zip"|tr '\n' '\0' |xargs -0 du -sh|sort -h
