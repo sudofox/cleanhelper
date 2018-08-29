@@ -11,6 +11,12 @@ if [ -d /home/temp ]; then # LW server
 	printf $(du -hc /home/temp|tail -1|awk '{print $1}')"\t/home/temp - LW temporary file directory\n"
 fi;
 
+# cPanel backups (default backup folder is /backup)
+# todo: find way to check backup location in case it's not in /backup
+
+printf "## cPanel backups (/backup)\n"
+du -sh /backup/* /backup/ 2>/dev/null
+
 # cPanel trash dirs
 printf "## cPanel trash folders\n"
 #du -sh -t20k /home/*/.trash 2>/dev/null
@@ -59,6 +65,9 @@ du -sh /home/*/*/*/administrator/components/com_akeeba/backup /home/*/public_htm
 
 printf "## ai1wm-backups\n"
 du -sh /home/*/*/*/wp-content/ai1wm-backups /home/*/public_html/wp-content/ai1wm-backups /home/*/*/wp-content/ai1wm-backups /home/*/public_html/*/wp-content/ai1wm-backups 2>/dev/null|sort -h 
+
+printf "## BackupBuddy backups\n"
+du -sh /home/*/*/*/wp-content/uploads/backupbuddy_backups /home/*/public_html/wp-content/uploads/backupbuddy_backups /home/*/*/wp-content/uploads/backupbuddy_backups /home/*/public_html/*/wp-content/uploads/backupbuddy_backups 2>/dev/null|sort -h
 
 printf "## BackWPup backups\n"
 du -sh /home/*/*/*/wp-content/uploads/backwpup-??????-backups /home/*/public_html/wp-content/uploads/backwpup-??????-backups /home/*/*/wp-content/uploads/backwpup-??????-backups /home/*/public_html/*/wp-content/uploads/backwpup-??????-backups 2>/dev/null|sort -h 
