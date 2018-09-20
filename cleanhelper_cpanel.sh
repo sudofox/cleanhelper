@@ -84,7 +84,7 @@ du -sh /home/*/*/*/wp-content/backupwordpress-??????????-backups /home/*/public_
 du -sh /home/*/*/*/wp-content/??????????-backups /home/*/public_html/wp-content/??????????-backups /home/*/*/wp-content/??????????-backups /home/*/public_html/*/wp-content/??????????-backups 2>/dev/null |sort -h
 
 printf "## .Trash, .spam, .Junk IMAP folders\n"
-du -sh /home/*/mail/*.*/*/.Trash /home/*/mail/*/*/.spam/ /home/*/mail/*.*/*/.Junk 2>/dev/null|egrep "([0-9]{1}G|[0-9]{2}M)[[:space:]]"
+du -sh /home/*/mail/.Trash /home/*/mail/.spam /home/*/mail/.Junk /home/*/mail/*.*/*/.Trash /home/*/mail/*/*/.spam/ /home/*/mail/*.*/*/.Junk 2>/dev/null|egrep "([0-9]{1}G|[0-9]{2}M)[[:space:]]"
 
 printf "## Failed/partially created zip files\n"
 du -sh /home/*/zi?????? /home/*/*/zi?????? /home/*/*/zi?????? /home/*/*/*/zi?????? 2>/dev/null| grep -v "/home/virtfs/" | sort -h
@@ -96,3 +96,5 @@ find /home -type f -size +100M|grep -v virtfs|grep "\.zip"|tr '\n' '\0' |xargs -
 printf "## Large error_logs (>30MB) within cPanel accounts (public_html)\n"
 find /home/* -path /home/virtfs -prune -o -type f -name error_log -size +30M |grep -v virtfs|xargs -r -L1 du -sh
 
+printf "## Size of yum package-manager cache ( /var/cache/yum )\n"
+du -sh /var/cache/yum
