@@ -4,9 +4,9 @@
 
 # TODO: du's -t flag doesn't work on RHEL/CentOS 6 and earlier, find alternative or detect CentOS 6 and earlier to compensate
 
-printf "## Easy things to cleanup\n"
+printf "# Easy things to clean up\n"
 
-if [ -d /home/temp ]; then # LW server
+if [ -d /usr/local/lp/ ] && [ -d /home/temp/ ]; then # LW server
 	# /home/temp - tempdir
 	printf $(du -hc /home/temp|tail -1|awk '{print $1}')"\t/home/temp - LW temporary file directory\n"
 fi;
@@ -73,10 +73,10 @@ printf "## envato-backups\n"
 
 du -sh /home/*/*/*/wp-content/envato-backups /home/*/public_html/wp-content/envato-backups /home/*/*/wp-content/envato-backups /home/*/public_html/*/wp-content/envato-backups 2>/dev/null |sort -h
 
-printf "## WP-DBManager\n"
+printf "## WP-DBManager backups\n"
 du -sh /home/*/*/*/wp-content/backup-db /home/*/public_html/wp-content/backup-db /home/*/*/wp-content/backup-db /home/*/public_html/*/wp-content/backup-db 2>/dev/null |sort -h
 
-printf "## BackUpWordPress\n"
+printf "## BackUpWordPress backups\n"
 du -sh /home/*/*/*/wp-content/backupwordpress-??????????-backups /home/*/public_html/wp-content/backupwordpress-??????????-backups /home/*/*/wp-content/backupwordpress-??????????-backups /home/*/public_html/*/wp-content/backupwordpress-??????????-backups 2>/dev/null |sort -h
 du -sh /home/*/*/*/wp-content/??????????-backups /home/*/public_html/wp-content/??????????-backups /home/*/*/wp-content/??????????-backups /home/*/public_html/*/wp-content/??????????-backups 2>/dev/null |sort -h
 
