@@ -39,9 +39,6 @@ du -sh /home/*.tar.gz 2>/dev/null
 printf "## .zip files in /home directories - old manually-made backups?\n"
 du -sh /home/*/*.zip 2>/dev/null|sort -h
 
-printf "## Large PHP-FPM error logs\n"
-ls -lhGS /home/*/logs/*php.error.log 2>/dev/null|tac|tail -n20|awk '{print $4" "$8}'|column -t
-
 printf "## Failed uploads for cPanel File Manager\n"
 du -sh /home/*/tmp/Cpanel_Form_file.upload* 2>/dev/null|egrep "([0-9]{1}G|[0-9]{2}M)[[:space:]]" |sort -h
 
@@ -89,12 +86,25 @@ du -sh /home/*/mail/.Trash /home/*/mail/.spam /home/*/mail/.Junk /home/*/mail/*.
 printf "## Failed/partially created zip files\n"
 du -sh /home/*/zi?????? /home/*/*/zi?????? /home/*/*/zi?????? /home/*/*/*/zi?????? 2>/dev/null| grep -v "/home/virtfs/" | sort -h
 
+printf "## PHP Core dumps (can be removed)\n"
+du -sh /home/*/core.????? /home/*/*/core.????? /home/*/*/core.????? /home/*/*/*/core.????? 2>/dev/null| grep -v "/home/virtfs/" | sort -h
+
+printf "## MySQL database dumps that failed to import from a cPanel backup restoration\n"
+du -sh /home/*/cpmove_failed_mysql_dbs.?????????? 2>/dev/null|sort -h
+
+printf "## Large PHP-FPM error logs\n"
+ls -lhGS /home/*/logs/*php.error.log 2>/dev/null|tac|tail -n20|awk '{print $4" "$8}'|column -t
+
+# The stuff below is a little slower
+# To find files over 50MB:
+# find /home/* -path /home/virtfs -prune -o -type f -size +50M|grep -v virtfs|tr '\n' '\0' |xargs -0 ls -larth|sort -n -k5
+
 printf "## zip files > 100 MB\n"
 find /home -type f -size +100M|grep -v virtfs|grep "\.zip"|tr '\n' '\0' |xargs -0 du -sh|sort -h
 
 # TODO: This is too slow
 printf "## Large error_logs (>30MB) within cPanel accounts (public_html)\n"
-find /home/* -path /home/virtfs -prune -o -type f -name error_log -size +30M |grep -v virtfs|xargs -r -L1 du -sh
+find /home/* -path /home/virtfs -prune -o -type f -name error_log -size +30M |grep -v virtfs|tr '\n' '\0' |xargs -0 -r -L1 du -sh
 
-printf "## Size of yum package-manager cache ( /var/cache/yum )\n"
+printf "## Size of yum package-manager cache ( /var/cache/yum ) -- clean if over 200-300 MB\n"
 du -sh /var/cache/yum
