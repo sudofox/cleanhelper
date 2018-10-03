@@ -14,8 +14,12 @@ fi;
 # cPanel backups (default backup folder is /backup)
 # todo: find way to check backup location in case it's not in /backup
 
-printf "## cPanel backups (/backup)\n"
-du -sh /backup/* /backup/ 2>/dev/null
+CP_BACKUP_DIR=$(awk -F": " '/BACKUPDIR/{print $2}' /var/cpanel/backups/config)
+
+if [ ! -z $CP_BACKUP_DIR ]; then
+	printf "## cPanel backups ($CP_BACKUP_DIR)\n"
+	du -sh $CP_BACKUP_DIR/* $CP_BACKUP_DIR/ 2>/dev/null
+fi
 
 # cPanel trash dirs
 printf "## cPanel trash folders\n"
@@ -108,3 +112,6 @@ find /home/* -path /home/virtfs -prune -o -type f -name error_log -size +30M |gr
 
 printf "## Size of yum package-manager cache ( /var/cache/yum ) -- clean if over 200-300 MB\n"
 du -sh /var/cache/yum
+
+printf "## Size of journalctl logs - can clean older logs with journalctl --vacuum-size=128M\n"
+journalctl --disk-usage

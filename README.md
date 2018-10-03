@@ -49,3 +49,7 @@ This is more of a "quick glance-over" tool as it does not search every possible 
 - Failed uploads for cPanel File Manager
 - PHP Core dumps (can be removed)
 - Size of yum package-manager cache ( /var/cache/yum ) -- clean if over 200-300 MB
+
+#### Logs
+
+- journalctl log size (do not wipe entirely, vacuum down to a smaller size if needed)
