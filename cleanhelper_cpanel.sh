@@ -69,6 +69,7 @@ du -sh /home/*/*/*/wp-content/ai1wm-backups /home/*/public_html/wp-content/ai1wm
 
 printf "## BackupBuddy backups\n"
 du -sh /home/*/*/*/wp-content/uploads/backupbuddy_backups /home/*/public_html/wp-content/uploads/backupbuddy_backups /home/*/*/wp-content/uploads/backupbuddy_backups /home/*/public_html/*/wp-content/uploads/backupbuddy_backups 2>/dev/null|sort -h
+du -sh /home/*/*/*/wp-content/uploads/backupbuddy /home/*/public_html/wp-content/uploads/backupbuddy /home/*/*/wp-content/uploads/backupbuddy /home/*/public_html/*/wp-content/uploads/backupbuddy 2>/dev/null|sort -h
 
 printf "## BackWPup backups\n"
 du -sh /home/*/*/*/wp-content/uploads/backwpup-??????-backups /home/*/public_html/wp-content/uploads/backwpup-??????-backups /home/*/*/wp-content/uploads/backwpup-??????-backups /home/*/public_html/*/wp-content/uploads/backwpup-??????-backups 2>/dev/null|sort -h 
