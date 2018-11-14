@@ -40,6 +40,10 @@ printf "## .tar.gz files in /home directories - old cPanel backups?\n"
 du -sh /home/*/*.tar.gz 2>/dev/null
 du -sh /home/*.tar.gz 2>/dev/null
 
+printf "## .sql files in /home directories - old MySQL dumps\n"
+du -sh /home/*/*.sql 2>/dev/null
+du -sh /home/*.sql 2>/dev/null
+
 printf "## .zip files in /home directories - old manually-made backups?\n"
 du -sh /home/*/*.zip 2>/dev/null|sort -h
 
@@ -86,6 +90,9 @@ du -sh /home/*/*/*/wp-content/backupwordpress-??????????-backups /home/*/public_
 du -sh /home/*/*/*/wp-content/??????????-backups /home/*/public_html/wp-content/??????????-backups /home/*/*/wp-content/??????????-backups /home/*/public_html/*/wp-content/??????????-backups 2>/dev/null |sort -h
 
 printf "## .Trash, .spam, .Junk IMAP folders\n"
+printf "### To clean (on dovecot): /home/example/mail/example.com/info/.Trash --> doveadm expunge -u info@example.com mailbox INBOX.Trash all\n"
+printf "### After you finish cleaning, run this: /scripts/generate_maildirsize --allaccounts --confirm\n"
+
 du -sh /home/*/mail/.Trash /home/*/mail/.spam /home/*/mail/.Junk /home/*/mail/*.*/*/.Trash /home/*/mail/*/*/.spam/ /home/*/mail/*.*/*/.Junk 2>/dev/null|egrep "([0-9]{1}G|[0-9]{2}M)[[:space:]]"
 
 printf "## Failed/partially created zip files\n"
