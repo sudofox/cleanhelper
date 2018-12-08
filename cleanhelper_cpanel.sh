@@ -75,19 +75,21 @@ printf "## BackupBuddy backups\n"
 du -sh /home/*/*/*/wp-content/uploads/backupbuddy_backups /home/*/public_html/wp-content/uploads/backupbuddy_backups /home/*/*/wp-content/uploads/backupbuddy_backups /home/*/public_html/*/wp-content/uploads/backupbuddy_backups 2>/dev/null|sort -h
 du -sh /home/*/*/*/wp-content/uploads/backupbuddy /home/*/public_html/wp-content/uploads/backupbuddy /home/*/*/wp-content/uploads/backupbuddy /home/*/public_html/*/wp-content/uploads/backupbuddy 2>/dev/null|sort -h
 
+printf "## BackUpWordPress backups\n"
+du -sh /home/*/*/*/wp-content/backupwordpress-??????????-backups /home/*/public_html/wp-content/backupwordpress-??????????-backups /home/*/*/wp-content/backupwordpress-??????????-backups /home/*/public_html/*/wp-content/backupwordpress-??????????-backups 2>/dev/null |sort -h
+du -sh /home/*/*/*/wp-content/??????????-backups /home/*/public_html/wp-content/??????????-backups /home/*/*/wp-content/??????????-backups /home/*/public_html/*/wp-content/??????????-backups 2>/dev/null |sort -h
+
 printf "## BackWPup backups\n"
 du -sh /home/*/*/*/wp-content/uploads/backwpup-??????-backups /home/*/public_html/wp-content/uploads/backwpup-??????-backups /home/*/*/wp-content/uploads/backwpup-??????-backups /home/*/public_html/*/wp-content/uploads/backwpup-??????-backups 2>/dev/null|sort -h 
 
 printf "## envato-backups\n"
-
 du -sh /home/*/*/*/wp-content/envato-backups /home/*/public_html/wp-content/envato-backups /home/*/*/wp-content/envato-backups /home/*/public_html/*/wp-content/envato-backups 2>/dev/null |sort -h
+
+printf "## wpbackitup backups\n"
+du -sh /home/*/*/*/wp-content/wpbackitup_backups /home/*/public_html/wp-content/wpbackitup_backups /home/*/*/wp-content/wpbackitup_backups /home/*/public_html/*/wp-content/wpbackitup_backups 2>/dev/null |sort -h
 
 printf "## WP-DBManager backups\n"
 du -sh /home/*/*/*/wp-content/backup-db /home/*/public_html/wp-content/backup-db /home/*/*/wp-content/backup-db /home/*/public_html/*/wp-content/backup-db 2>/dev/null |sort -h
-
-printf "## BackUpWordPress backups\n"
-du -sh /home/*/*/*/wp-content/backupwordpress-??????????-backups /home/*/public_html/wp-content/backupwordpress-??????????-backups /home/*/*/wp-content/backupwordpress-??????????-backups /home/*/public_html/*/wp-content/backupwordpress-??????????-backups 2>/dev/null |sort -h
-du -sh /home/*/*/*/wp-content/??????????-backups /home/*/public_html/wp-content/??????????-backups /home/*/*/wp-content/??????????-backups /home/*/public_html/*/wp-content/??????????-backups 2>/dev/null |sort -h
 
 printf "## .Trash, .spam, .Junk IMAP folders\n"
 printf "### To clean (on dovecot): /home/example/mail/example.com/info/.Trash --> doveadm expunge -u info@example.com mailbox INBOX.Trash all\n"
